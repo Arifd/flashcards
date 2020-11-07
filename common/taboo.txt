@@ -1,360 +1,72 @@
-thrifty
-cheap
-spend
-money
-stingy
-double
-twice
-number
-triple
-amount
-tragedy
-terrible
-sad
-victim
-disaster
-lawn
-grass
-mow
-green
-yard
-arrest
-jail
-criminal
-police
-handcuffs
-educate
-child
-teach
-learn
-school
-myth
-Greek
-legend
-history
-culture
-measurement
-unit
-height
-distance
-length
-prescription
-doctor
-paper
-medicine
-pharmacy
-grave
-bury
-cemetery
-dig
-funeral
-makeup
-women
-lipstick
-pretty
-put on
-hunt
-deer
-gun
-woods
-food
-surgeon
-doctor
-surgery
-operation
-hospital
-suburb
-city
-outside
-quiet
-live
-minimum
-maximum
-lowest
-wage
-amount
-sacred
-holy
-religious
-blessed
-cow
-warrior
-soldier
-war
-attack
-battle
-retired
-work
-relax
-old
-pension
-survey
-ask
-questions
-opinion
-fill out
-corruption
-politician
-bribe
-government
-scandal
-hook
-fishing
-metal
-sharp
-bait
-ankle
-sprain
-leg
-foot
-break
-steep
-climb
-mountain
-hill
-angle
-spread
-disease
-virus
-infection
-prevent
-cooperate
-together
-everyone
-unite
-work
-sacrifice
-human
-kill
-ritual
-blood
-bubble
-gum
-soap
-blow
-pop
-jaw
-mouth
-teeth
-bones
-chew
-sail
-ship
-boat
-ocean
-wind
-tropical
-hot
-storm
-island
-exotic
-mushroom
-white
-eat
-fungus
-sauce
-workout
-gym
-weight
-train
-exercise
-chew
-gum
-food
-eat
-teeth
-fragile
-delicate
-break
-glass
-careful
-mansion
-house
-home
-live
-expensive
-crowd
-people
-many
-herd
-street
-spit
-mouth
-saliva
-liquid
-tobacco
-hike
-walk
-woods
-mountain
-backpack
-dinosaur
-giant
-extinct
-lizard
-Barney
-polite
-nice
-smile
-manners
-friendly
-fried
-chicken
-cook
-food
-oil
-jail
-prison
-criminals
-bars
-arrest
-cigar
-Cuban
-smoke
-tobacco
-cigarette
-sip
-drink
-taste
-mouth
-try
-torture
-prisoner
-information
-pain
-guard
-nun
-Catholic
-woman
-priest
-sister
-owl
-night
-bird
-hoot
-tree
-lottery
-win
-money
-ticket
-gambling
-click
-mouse
-select
-tap
-noise
-hammer
-nail
-swing
-build
-tool
-coconut
-fruit
-oil
-white
-milk
-syrup
-pancakes
-sweet
-maple
-butter
-tornado
-storm
-wind
-damage
-hurricane
-float
-boat
-water
-surface
-top
-pearl
-oyster
-white
-jewelry
-diver
-allergy
-sneeze
-itch
-spring
-season
-pirate
-ship
-Caribbean
-Johnny Depp
-Captain Hook
-shovel
-dig
-hole
-shed
-snow
-cash
-money
-check
-payment
-dollar
-diaper
-Pampers
-Huggies
-change
-baby
-hen
-rooster
-chicken
-farm
-eggs
-mustache
-hair
-beard
-lip
-shave
-microwave
-heat
-food
-fast
-cook
-grill
-barbecue
-cook
-fire
-meat
-drummer
-Ringo
-beat
-sticks
-band
-toast
-bread
-butter
-breakfast
-jelly
-chart
-graph
-numbers
-visual
-data
-pajamas
-bed
-night
-sleepover
-clothes
-barber
-haircut
-shave
-scissors
-hairdresser
-barefoot
-shoes
-socks
-summer
-beach
-donkey
-gray
-cart
-stubborn
-ride
-blizzard
-snow
-cold
-weather
-storm
+taboo: thrifty,cheap,spend,money,stingy
+taboo: double,twice,number,triple,amount
+taboo: tragedy,terrible,sad,victim,disaster
+taboo: lawn,grass,mow,green,yard
+taboo: arrest,jail,criminal,police,handcuffs
+taboo: educate,child,teach,learn,school
+taboo: myth,Greek,legend,history,culture
+taboo: measurement,unit,height,distance,length
+taboo: prescription,doctor,paper,medicine,pharmacy
+taboo: grave,bury,cemetery,dig,funeral
+taboo: makeup,women,lipstick,pretty,put on
+taboo: hunt,deer,gun,woods,food
+taboo: surgeon,doctor,surgery,operation,hospital
+taboo: suburb,city,outside,quiet,live
+taboo: minimum,maximum,lowest,wage,amount
+taboo: sacred,holy,religious,blessed,cow
+taboo: warrior,soldier,war,attack,battle
+taboo: retired,work,relax,old,pension
+taboo: survey,ask,questions,opinion,fill out
+taboo: corruption,politician,bribe,government,scandal
+taboo: hook,fishing,metal,sharp,bait
+taboo: ankle,sprain,leg,foot,break
+taboo: steep,climb,mountain,hill,angle
+taboo: spread,disease,virus,infection,prevent
+taboo: cooperate,together,everyone,unite,work
+taboo: sacrifice,human,kill,ritual,blood
+taboo: bubble,gum,soap,blow,pop
+taboo: jaw,mouth,teeth,bones,chew
+taboo: sail,ship,boat,ocean,wind
+taboo: tropical,hot,storm,island,exotic
+taboo: mushroom,white,eat,fungus,sauce
+taboo: workout,gym,weight,train,exercise
+taboo: chew,gum,food,eat,teeth
+taboo: fragile,delicate,break,glass,careful
+taboo: mansion,house,home,live,expensive
+taboo: crowd,people,many,herd,street
+taboo: spit,mouth,saliva,liquid,tobacco
+taboo: hike,walk,woods,mountain,backpack
+taboo: dinosaur,giant,extinct,lizard,Barney
+taboo: polite,nice,smile,manners,friendly
+taboo: fried,chicken,cook,food,oil
+taboo: jail,prison,criminals,bars,arrest
+taboo: cigar,Cuban,smoke,tobacco,cigarette
+taboo: sip,drink,taste,mouth,try
+taboo: torture,prisoner,information,pain,guard
+taboo: nun,Catholic,woman,priest,sister
+taboo: owl,night,bird,hoot,tree
+taboo: lottery,win,money,ticket,gambling
+taboo: click,mouse,select,tap,noise
+taboo: hammer,nail,swing,build,tool
+taboo: coconut,fruit,oil,white,milk
+taboo: syrup,pancakes,sweet,maple,butter
+taboo: tornado,storm,wind,damage,hurricane
+taboo: float,boat,water,surface,top
+taboo: pearl,oyster,white,jewelry,diver
+taboo: allergy,sneeze,itch,spring,season
+taboo: pirate,ship,Caribbean,Johnny Depp,Captain Hook
+taboo: shovel,dig,hole,shed,snow
+taboo: cash,money,check,payment,dollar
+taboo: diaper,Pampers,Huggies,change,baby
+taboo: hen,rooster,chicken,farm,eggs
+taboo: mustache,hair,beard,lip,shave
+taboo: microwave,heat,food,fast,cook
+taboo: grill,barbecue,cook,fire,meat
+taboo: drummer,Ringo,beat,sticks,band
+taboo: toast,bread,butter,breakfast,jelly
+taboo: chart,graph,numbers,visual,data
+taboo: pajamas,bed,night,sleepover,clothes
+taboo: barber,haircut,shave,scissors,hairdresser
+taboo: barefoot,shoes,socks,summer,beach
+taboo: donkey,gray,cart,stubborn,ride
+taboo: blizzard,snow,cold,weather,storm

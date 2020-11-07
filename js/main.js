@@ -6,7 +6,12 @@ const carousel = document.createElement("main");
 carousel.classList.add("scroll-container");
 load.addEventListener('change', read_file);
 
-// <div class="carousel-cell">...</div>
+let sections = [];
+let current_section = 0;
+
+const prev = document.createElement("button");
+const next = document.createElement("button");
+
 
 function tester() {
   console.log("hello");
@@ -34,13 +39,13 @@ function read_file() {
 
 function process_file(data) {
   let text = data.target.result;
-  let sections = [];
   
   // split on new lines and shuffle
   let lines = text.split("\n").sort(() => Math.random() - 0.5); //.filter(entry => /\S/.test(entry)));
 
   // create sections
   let last_colour;
+  let i = 0;
   for (const line of lines) {
     let content = [];
 
@@ -55,7 +60,7 @@ function process_file(data) {
     if (line.slice(0, 6).toLowerCase() == "taboo:") {
       let length = 6;
       if (line[length] == " ") length += 1;
-      content = section.slice(length).split(",").map(item => item.trim());
+      content = line.slice(length).split(",").map(item => item.trim());
     }
     else {
       // just forward the section on as content
@@ -63,18 +68,18 @@ function process_file(data) {
     }
 
     // submit section (and collect a list of the elements returned)
-    sections.push(add_flashsection(content, colour));
+    sections.push(add_flashsection(content, i++, colour));
   }
 
   // add lazy loading
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      let section = entry.target;
       if (entry.intersectionRatio >= 0.25) {
-        let content = entry.target.firstElementChild;
-        content.style.opacity = 1;
+        section.firstElementChild.style.opacity = 1;
+        current_section = parseInt(section.id.slice(8));
       } else {
-        let content = entry.target.firstElementChild;
-        content.style.opacity = 0;
+        section.firstElementChild.style.opacity = 0;
       }
     })
   }, {
@@ -87,29 +92,42 @@ function process_file(data) {
   });
 
   // create scroll buttons
-  const prev = document.createElement("div");
-  prev.style.opacity = 0.2;
   prev.className = "arrow left";
-  prev.onclick = () => carousel.scroll(carousel.scrollLeft - window.innerWidth, 0);
+  //prev.onclick = () => carousel.scroll(carousel.scrollLeft - window.innerWidth, 0);
+  prev.onclick = () => sections[current_section - 1].scrollIntoView({behavior: "smooth"});
 
-  const next = document.createElement("div");
   next.className = "arrow right";
-  next.onclick = () => carousel.scroll(carousel.scrollLeft + window.innerWidth, 0);
+  //next.onclick = () => carousel.scroll(carousel.scrollLeft + window.innerWidth, 0);
+  next.onclick = () => sections[current_section + 1].scrollIntoView({behavior: "smooth"});
 
-  carousel.addEventListener("scroll", () => {
+  const show_hide_arrows = () => {
     if (carousel.scrollLeft < window.innerWidth) {
-      window.requestAnimationFrame(() => prev.style.opacity = 0.2);
+      window.requestAnimationFrame(() => {
+        prev.style.opacity = 0.2;
+        prev.disabled = true;
+      });
     } else {
-      window.requestAnimationFrame(() => prev.style.opacity = 1);
+      window.requestAnimationFrame(() => {
+        prev.style.opacity = 1;
+        prev.disabled = false;
+      });
     };
 
     if (carousel.scrollLeft >= carousel.scrollWidth - window.innerWidth) {
-      window.requestAnimationFrame(() => next.style.opacity = 0.2);
+      window.requestAnimationFrame(() => {
+        next.style.opacity = 0.2
+        next.disabled = true;
+      });
     } else {
-      window.requestAnimationFrame(() => next.style.opacity = 1);
+      window.requestAnimationFrame(() => {
+        next.style.opacity = 1
+        next.disabled = false;
+      });
     };
 
-  });
+  };
+
+  carousel.addEventListener("scroll", show_hide_arrows);
 
   document.body.appendChild(prev);
   document.body.appendChild(next);
@@ -121,10 +139,14 @@ function process_file(data) {
 
   // resize the text once it´s been added to DOM
   sections.forEach( (element) => window.fitText(element) );
+
+  // update the arrows
+  show_hide_arrows();
 }
 
-function add_flashsection(content, colour) {
+function add_flashsection(content, i, colour) {
   let section = document.createElement("section");
+  section.id = `section-${i}`;
   section.style.background = `linear-gradient(to top, hsl(${colour},50%,66%) 0%, hsl(0,0%,66%) 100%)`;
   
   if (content.length > 1) {
@@ -178,3 +200,30 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+(function detectSwipe(){
+  let touchstartX = 0,
+      touchstartY = 0,
+      touchendX = 0,
+      touchendY = 0;
+
+  window.addEventListener('touchstart', function(event) {
+    touchstartX = event.changedTouches[0].screenX;
+    touchstartY = event.changedTouches[0].screenY;
+    // document.documentElement.requestFullscreen();
+  });
+  
+  window.addEventListener('touchend', function(event) {
+    const SENSITIVITY = 40;
+    touchendX = event.changedTouches[0].screenX;
+    touchendY = event.changedTouches[0].screenY;
+    // determine horizontal swipe
+    if (Math.abs(touchstartX - touchendX) > SENSITIVITY)
+      touchendX > touchstartX  ? next.click() : prev.click();
+  });
+})();
+
+document.addEventListener('wheel', e => {
+  console.log('wheel');
+  e.deltaY < 0 ? prev.click() : next.click();
+});
