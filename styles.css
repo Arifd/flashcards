@@ -1,0 +1,119 @@
+* {
+box-sizing: border-box;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  padding:0;
+  margin:0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  background-color: #818999;
+  background: linear-gradient(rgb(5, 7, 11) 0px, rgb(23, 23, 29));
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* All the snapping stuff */
+.scroll-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  height: 100%;
+    overflow: hidden;
+}
+
+section {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  scroll-snap-align: center;
+
+  color: black;
+
+  border: 2px solid #222222;
+
+  user-select: none;
+}
+
+section .content {
+  transition: all 1000ms;
+}
+
+h1, h2 {
+  padding:0;
+  margin:0;
+}
+
+dl, ul {
+  margin: 10%;
+  padding: 0;
+  list-style-position: outside;
+}
+
+dt {
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-bottom: 3px solid #000000;
+}
+ 
+li {
+  color: white;
+  font-size: smaller;
+  border-bottom: 1px dotted #666666;
+}
+
+li:last-child {
+  border: none;
+}
+
+#init {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- previous/next buttons ---- */
+
+.arrow {
+  border: solid grey;
+  border-width: 0 12px 12px 0;
+  display: inline-block;
+  padding: 12px;
+  z-index: 999;
+}
+
+.arrow:hover {
+  border: solid white;
+  border-width: 0 12px 12px 0;
+  display: inline-block;
+  padding: 12px;
+}
+
+.right {
+  position: absolute;
+  right: 4%;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  position: absolute;
+  left: 4%;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
