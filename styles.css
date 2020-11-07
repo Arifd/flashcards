@@ -28,7 +28,6 @@ body {
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   height: 100%;
-    overflow: hidden;
 }
 
 section {
@@ -97,7 +96,7 @@ li:last-child {
   z-index: 999;
 }
 
-.arrow:hover {
+.arrow:active {
   border: solid white;
   border-width: 0 12px 12px 0;
   display: inline-block;
