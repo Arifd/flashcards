@@ -163,7 +163,7 @@ function add_flashsection(content, colour) {
 
 function random_colour() {
   // 137.5
-  return getRandomInt(0, Number.MAX_SAFE_INTEGER) * 137.5; 
+  return getRandomInt(0, Number.MAX_SAFE_INTEGER) * 137.5 % 360; 
 }
 
 /**
