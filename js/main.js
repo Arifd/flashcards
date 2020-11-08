@@ -5,6 +5,7 @@ const load = document.getElementById('load');
 const carousel = document.createElement("main");
 carousel.classList.add("scroll-container");
 load.addEventListener('change', read_file);
+let progress = document.getElementById("progress");
 
 let sections = [];
 let current_section = 0;
@@ -47,6 +48,9 @@ function process_file(data) {
   let last_colour;
   let i = 0;
   for (const line of lines) {
+    // update loading-bar
+    progress.style.width = (lines.length / i) + "%";
+
     let content = [];
 
     // prepare colour
@@ -219,7 +223,7 @@ function getRandomInt(min, max) {
     touchendY = event.changedTouches[0].screenY;
     // determine horizontal swipe
     if (Math.abs(touchstartX - touchendX) > SENSITIVITY)
-      touchendX > touchstartX  ? next.click() : prev.click();
+      touchendX > touchstartX  ? prev.click() : next.click();
   });
 })();
 
