@@ -3,6 +3,7 @@
 const init = document.getElementById('init');
 const load = document.getElementById('load');
 const carousel = document.createElement("main");
+let carousel_fragment = document.createDocumentFragment();
 carousel.classList.add("scroll-container");
 load.addEventListener('change', read_file);
 let progress = document.getElementById("progress");
@@ -43,20 +44,9 @@ function process_file(data) {
   let lines = text.split("\n").sort(() => Math.random() - 0.5); //.filter(entry => /\S/.test(entry)));
 
   // create sections
-  let last_colour;
   let i = 0;
   for (const line of lines) {
-    // update loading-bar
-    progress.style.width = (lines.length / i) + "%";
-
     let content = [];
-
-    // prepare colour
-    let colour = random_colour();
-      while (Math.abs(colour - last_colour) < 60) {
-        colour = random_colour();
-      }
-      last_colour = colour;
 
     // check prefix and format section appropriately
     if (line.slice(0, 6).toLowerCase() == "taboo:") {
@@ -69,8 +59,8 @@ function process_file(data) {
       content.push(line);
     }
 
-    // submit section (and collect a list of the elements returned)
-    sections.push(add_flashsection(content, i++, colour));
+    // create flashcards
+    sections.push(create_flashcard(content, i++, i * 137.5 % 360));
   }
 
   // add lazy loading
@@ -90,17 +80,16 @@ function process_file(data) {
   });
 
   sections.forEach((section, index) => {
+    carousel_fragment.appendChild(section);
     observer.observe(section);
   });
 
   // create scroll buttons
   prev.className = "arrow left";
-  //prev.onclick = () => carousel.scroll(carousel.scrollLeft - window.innerWidth, 0);
-  prev.onclick = () => sections[current_section - 1].scrollIntoView({behavior: "smooth"});
+  prev.onclick = () => carousel.scroll(carousel.scrollLeft - window.innerWidth, 0);
 
   next.className = "arrow right";
-  //next.onclick = () => carousel.scroll(carousel.scrollLeft + window.innerWidth, 0);
-  next.onclick = () => sections[current_section + 1].scrollIntoView({behavior: "smooth"});
+  next.onclick = () => carousel.scroll(carousel.scrollLeft + window.innerWidth, 0);
 
   const show_hide_arrows = () => {
     if (carousel.scrollLeft < window.innerWidth) {
@@ -135,8 +124,11 @@ function process_file(data) {
   document.body.appendChild(next);
 
   // signal completion
+  carousel.appendChild(carousel_fragment);
   document.body.removeChild(init);
   document.body.appendChild(carousel);
+
+  window.screen.orientation.lock("landscape").catch((e)=>{});
   document.body.requestFullscreen();
 
   // resize the text once it´s been added to DOM
@@ -146,10 +138,10 @@ function process_file(data) {
   show_hide_arrows();
 }
 
-function add_flashsection(content, i, colour) {
+function create_flashcard(content, i, hue) {
   let section = document.createElement("section");
   section.id = `section-${i}`;
-  section.style.background = `linear-gradient(to top, hsl(${colour},50%,66%) 0%, hsl(0,0%,66%) 100%)`;
+  section.style.background = `linear-gradient(to top, hsl(${hue},50%,66%) 0%, hsl(0,0%,66%) 100%)`;
   
   if (content.length > 1) {
     // the first is the title, the rest are sub
@@ -166,42 +158,10 @@ function add_flashsection(content, i, colour) {
     section.innerHTML = `<div class='content'>${content[0]}</div>`;
   }
 
-  carousel.appendChild(section);
-
   return section;
 }
 
-// HELPERS
-
-/**
- * Shuffles array in place. ES6 version
- * @param {Array} a items An array containing the items.
- */
-// function shuffle(a) {
-//     for (let i = a.length - 1; i > 0; i--) {
-//         const j = Math.floor(Math.random() * (i + 1));
-//         [a[i], a[j]] = [a[j], a[i]];
-//     }
-//     return a;
-// }
-
-function random_colour() {
-  // 137.5
-  return getRandomInt(0, Number.MAX_SAFE_INTEGER) * 137.5 % 360; 
-}
-
-/**
- * Returns a random integer between min (inclusive) and max (inclusive).
- * The value is no lower than min (or the next integer greater than min
- * if min isn't an integer) and no greater than max (or the next integer
- * lower than max if max isn't an integer).
- * Using Math.round() will give you a non-uniform distribution!
- */
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+// INPUT
 
 (function detectSwipe(){
   let touchstartX = 0,
@@ -221,11 +181,15 @@ function getRandomInt(min, max) {
     touchendY = event.changedTouches[0].screenY;
     // determine horizontal swipe
     if (Math.abs(touchstartX - touchendX) > SENSITIVITY)
-      touchendX > touchstartX  ? prev.click() : next.click();
+      touchendX > touchstartX  ? swipe(-1) : swipe(1);
   });
 })();
 
 document.addEventListener('wheel', e => {
   console.log('wheel');
-  e.deltaY < 0 ? prev.click() : next.click();
+  e.deltaY < 0 ? swipe(-1) : swipe(1);
 });
+
+function swipe(direction) {
+    window.requestAnimationFrame(()=>sections[current_section + direction].scrollIntoView({behavior: "smooth"}));
+}
