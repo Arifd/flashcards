@@ -13,11 +13,6 @@ let current_section = 0;
 const prev = document.createElement("button");
 const next = document.createElement("button");
 
-
-function tester() {
-  console.log("hello");
-}
-
 async function createFile(path){
   let response = await fetch(path);
   let data = await response.blob();
@@ -39,6 +34,9 @@ function read_file() {
 }
 
 function process_file(data) {
+  // let user know of potentially slow operation
+  alert("Loading... This could take a few seconds");
+
   let text = data.target.result;
   
   // split on new lines and shuffle
@@ -218,7 +216,7 @@ function getRandomInt(min, max) {
   });
   
   window.addEventListener('touchend', function(event) {
-    const SENSITIVITY = 40;
+    const SENSITIVITY = 25;
     touchendX = event.changedTouches[0].screenX;
     touchendY = event.changedTouches[0].screenY;
     // determine horizontal swipe
